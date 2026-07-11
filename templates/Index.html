@@ -24,7 +24,8 @@
         <!-- Pestañas (tabs) -->
         <div class="tabs">
             <button class="tab-btn active" data-tab="tab1">👁️ Clasificador</button>
-            <button class="tab-btn" data-tab="tab2">📋 Otras cosas</button>
+            <button class="tab-btn" data-tab="tab2">✨ Estilos de Pestañas ✨</button>
+            <button class="tab-btn" data-tab="tab3">💬 Asistente IA</button>
             <!-- Puedes agregar más pestañas aquí -->
         </div>
 
@@ -64,15 +65,79 @@
                 </div>
             </div>
 
-            <!-- Pestaña 2: Otras cosas -->
+            <!-- Pestaña 2: Estilos de pestañas -->
             <div id="tab2" class="tab-pane">
-                <h2 style="color: #e91e63; font-weight: 400;">✨ Otras cosas ✨</h2>
-                <p style="color: #6a4a5a;">Aquí puedes agregar información, galería, contacto, lo que desees.</p>
-                <!-- Ejemplo: un espacio para texto o imágenes -->
-                <div style="margin-top: 20px; padding: 20px; background: rgba(255,255,255,0.3); border-radius: 30px;">
-                    <p>🖌️ Contenido adicional... </p>
+                <h2 style="color: #e91e63; font-weight: 600; margin-bottom: 16px;">✨ Estilos de Pestañas ✨</h2>
+                <p style="color: #6a4a5a; margin-bottom: 24px;">
+                    Conoce los looks más populares y elige el que mejor se adapte a tus ojos.
+                </p>
+
+                <div class="styles-grid">
+                    <!-- Natural -->
+                    <div class="style-card">
+                        <div class="img-wrapper">
+                            <img src="Natural.JPEG" alt="Natural Style" class="style-img" />
+                        </div>
+                        <div class="style-info">
+                            <h3>🌿 Natural</h3>
+                            <p>Realza la belleza natural del ojo con una definición sutil. Ideal para un look diario y fresco.</p>
+                            <div class="style-map">Mapa: <span>1–100</span></div>
+                        </div>
+                    </div>
+
+                    <!-- Cat Eye -->
+                    <div class="style-card">
+                        <div class="img-wrapper">
+                            <img src="Cat.JPEG" alt="Cat Eye" class="style-img" />
+                        </div>
+                        <div class="style-info">
+                            <h3>🐱 Cat Eye</h3>
+                            <p>Alarga y eleva la mirada hacia las sienes, creando un efecto felino y sofisticado. Perfecto para ojos redondos.</p>
+                            <div class="style-map">Mapa: <span>11–12 (esquina externa)</span></div>
+                        </div>
+                    </div>
+
+                    <!-- Dolly -->
+                    <div class="style-card">
+                        <div class="img-wrapper">
+                            <img src="Dolly.JPEG" alt="Dolly Eyes" class="style-img" />
+                        </div>
+                        <div class="style-info">
+                            <h3>🎀 Dolly Eyes</h3>
+                            <p>Busca agrandar y redondear la mirada, con pestañas prominentes en el centro. Da un aspecto juvenil y tierno.</p>
+                            <div class="style-map">Mapa: <span>8–12 (centro)</span></div>
+                        </div>
+                    </div>
+
+                    <!-- Squirrel -->
+                    <div class="style-card">
+                        <div class="img-wrapper">
+                            <img src="Squirrel.JPEG" alt="Squirrel Eye" class="style-img" />
+                        </div>
+                        <div class="style-info">
+                            <h3>🐿️ Squirrel Eye</h3>
+                            <p>Similar al Cat Eye pero con un enfoque en alargar la esquina externa sin un ala tan pronunciada, dando una forma más suave y alargada.</p>
+                            <div class="style-map">Mapa: <span>8–11 (externo suave)</span></div>
+                        </div>
+                    </div>
                 </div>
-                <!-- Puedes poner lo que quieras aquí -->
+            </div>
+
+            <!-- Pestaña 3: Chatbot Gemini -->
+            <div id="tab3" class="tab-pane">
+                <h2 style="color: #e91e63; font-weight: 600; margin-bottom: 16px;">💬 Asistente de Estilos Oculares</h2>
+                <p style="color: #6a4a5a; margin-bottom: 20px;">
+                    Pregúntame sobre tipos de ojos, estilos de pestañas o recomendaciones de maquillaje. 
+                    <strong>Solo respondo sobre temas oculares</strong> 💕
+                </p>
+
+                <div class="chat-box" id="chatBox">
+                    <div class="chat-msg bot">👋 ¡Hola! Soy tu asistente de estilos oculares. Pregúntame sobre tipos de ojos (almendrados, saltones, etc.) o sobre estilos de pestañas como Cat Eye, Dolly, Squirrel o Natural.</div>
+                </div>
+                <div class="chat-input-row">
+                    <input type="text" id="chatInput" placeholder="Escribe tu pregunta..." />
+                    <button id="chatSendBtn">Enviar</button>
+                </div>
             </div>
         </div>
     </div>

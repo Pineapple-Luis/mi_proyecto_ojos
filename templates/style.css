@@ -299,7 +299,182 @@ body {
     to { transform: rotate(360deg); }
 }
 
-/* ========== RESPONSIVE ========== */
+/* ============================================================
+   ========== ESTILOS DE PESTAÑAS (escritorio) ==========
+   ============================================================ */
+.styles-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin-top: 12px;
+}
+
+.style-card {
+    display: flex;
+    align-items: stretch;
+    background: rgba(255, 255, 255, 0.6);
+    border-radius: 32px;
+    padding: 12px;
+    backdrop-filter: blur(4px);
+    border: 1px solid rgba(255, 255, 255, 0.7);
+    box-shadow: 0 8px 20px rgba(233, 30, 99, 0.06);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    gap: 16px;
+}
+
+.style-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 30px rgba(233, 30, 99, 0.12);
+}
+
+.style-card .img-wrapper {
+    flex-shrink: 0;
+    width: 130px;
+    height: 130px;
+    border-radius: 24px;
+    overflow: hidden;
+    background: rgba(255, 255, 255, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid rgba(233, 30, 99, 0.08);
+}
+
+.style-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+}
+
+.style-card:hover .style-img {
+    transform: scale(1.05);
+}
+
+.style-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 4px 0;
+}
+
+.style-info h3 {
+    font-size: 20px;
+    font-weight: 700;
+    color: #4a2a3a;
+    margin-bottom: 4px;
+}
+
+.style-info p {
+    font-size: 14px;
+    color: #6a4a5a;
+    line-height: 1.4;
+    margin-bottom: 6px;
+}
+
+.style-map {
+    font-size: 13px;
+    color: #ad7a8a;
+    background: rgba(233, 30, 99, 0.06);
+    padding: 4px 14px;
+    border-radius: 40px;
+    display: inline-block;
+    align-self: flex-start;
+}
+
+.style-map span {
+    font-weight: 600;
+    color: #e91e63;
+}
+
+/* ============================================================
+   ========== CHATBOT (estilos de escritorio) ==========
+   ============================================================ */
+.chat-box {
+    background: rgba(255, 255, 255, 0.6);
+    border-radius: 28px;
+    padding: 16px 20px;
+    max-height: 200px;
+    overflow-y: auto;
+    margin-bottom: 14px;
+    border: 1px solid rgba(233, 30, 99, 0.08);
+    backdrop-filter: blur(4px);
+}
+
+.chat-msg {
+    margin-bottom: 10px;
+    font-size: 15px;
+    line-height: 1.5;
+    padding: 8px 14px;
+    border-radius: 20px;
+    max-width: 85%;
+}
+
+.chat-msg.user {
+    background: linear-gradient(135deg, #f06292, #ec407a);
+    color: #fff;
+    margin-left: auto;
+    border-bottom-right-radius: 4px;
+}
+
+.chat-msg.bot {
+    background: rgba(255, 255, 255, 0.8);
+    color: #4a2a3a;
+    margin-right: auto;
+    border-bottom-left-radius: 4px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+}
+
+.chat-input-row {
+    display: flex;
+    gap: 10px;
+}
+
+.chat-input-row input {
+    flex: 1;
+    padding: 14px 18px;
+    border-radius: 60px;
+    border: 1px solid rgba(233, 30, 99, 0.15);
+    background: rgba(255, 255, 255, 0.7);
+    font-family: 'Quicksand', sans-serif;
+    font-size: 15px;
+    color: #4a2a3a;
+    outline: none;
+    transition: border-color 0.3s;
+}
+
+.chat-input-row input:focus {
+    border-color: #e91e63;
+    box-shadow: 0 0 0 3px rgba(233, 30, 99, 0.08);
+}
+
+.chat-input-row input::placeholder {
+    color: #b0a0b0;
+}
+
+.chat-input-row button {
+    background: linear-gradient(135deg, #f06292, #ec407a);
+    border: none;
+    border-radius: 60px;
+    padding: 0 28px;
+    font-family: 'Quicksand', sans-serif;
+    font-weight: 700;
+    font-size: 16px;
+    color: #fff;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(233, 30, 99, 0.2);
+}
+
+.chat-input-row button:hover {
+    transform: scale(1.03);
+    box-shadow: 0 6px 20px rgba(233, 30, 99, 0.3);
+}
+
+/* ============================================================
+   ========== RESPONSIVE (ajustes para móviles) ==========
+   ============================================================ */
 @media (max-width: 600px) {
     .glass-card {
         padding: 20px 16px;
@@ -330,4 +505,43 @@ body {
     .result-class {
         font-size: 22px;
     }
-}
+
+    /* Ajustes para las tarjetas de estilos en móvil: columna y centrado */
+    .style-card {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        padding: 16px;
+    }
+    .style-card .img-wrapper {
+        width: 100%;
+        max-width: 200px;
+        height: auto;
+        aspect-ratio: 1 / 1;
+    }
+    .style-info {
+        align-items: center;
+    }
+    .style-map {
+        align-self: center;
+    }
+
+    /* Ajustes del chat en móvil (opcional: reducir padding, fuentes, etc.) */
+    .chat-box {
+        max-height: 150px;
+        padding: 12px 16px;
+    }
+    .chat-msg {
+        font-size: 14px;
+        padding: 6px 12px;
+        max-width: 90%;
+    }
+    .chat-input-row input {
+        padding: 10px 14px;
+        font-size: 14px;
+    }
+    .chat-input-row button {
+        padding: 0 18px;
+        font-size: 14px;
+    }
+}   
