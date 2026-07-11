@@ -1,10 +1,269 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
-    <title>Mi App</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>🌸 Janeth Rocha - Lashes & Nails - Clasificador de Ojos</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;600;700&display=swap" rel="stylesheet" />
 </head>
 <body>
-    <h1>¡Hola! Esta es mi interfaz</h1>
-    <p>Sube una imagen para clasificar.</p>
+
+    <div class="glass-card">
+        <!-- Encabezado con logo -->
+        <div class="header">
+            <!-- Aquí va tu logo. Reemplaza 'logo.png' con la ruta de tu imagen -->
+            <img src="{{ url_for('static', filename='Logo.JPEG') }}" alt="Janeth Rocha - Lashes & Nails" class="logo" />
+            <div class="header-text">
+                <h1>Janeth Rocha - Lashes & Nails</h1>
+                <p class="subtitle">🌸 Clasificador de formas oculares · 7 categorías 🌸</p>
+            </div>
+            <span class="heart">💕</span>
+        </div>
+
+        <!-- Pestañas (tabs) -->
+        <div class="tabs">
+            <button class="tab-btn active" data-tab="tab1">👁️ Clasificador</button>
+            <button class="tab-btn" data-tab="tab2">✨ Estilos de Pestañas ✨</button>
+            <button class="tab-btn" data-tab="tab3">💬 Asistente IA</button>
+            <!-- Puedes agregar más pestañas aquí -->
+        </div>
+
+        <!-- Contenido de las pestañas -->
+        <div class="tab-content">
+            <!-- Pestaña 1: Clasificador -->
+            <div id="tab1" class="tab-pane active">
+                <!-- Zona de subida -->
+                <div class="drop-zone" id="dropZone">
+                    <div class="icon">🖼️</div>
+                    <p>Arrastra y suelta una foto de un ojo aquí</p>
+                    <p style="font-size: 14px; margin-top: 6px; color: #b0a0b0;">
+                        o <span class="highlight">haz clic</span> para seleccionar un archivo
+                    </p>
+                    <input type="file" id="fileInput" accept="image/*" />
+                </div>
+
+                <div id="preview-container">
+                    <img id="previewImage" src="#" alt="Vista previa" />
+                </div>
+
+                <button class="btn-predict" id="predictBtn">✨ Analizar este ojo ✨</button>
+
+                <div class="loader" id="loader">
+                    <div class="spinner"></div>
+                    <p style="color: #c0a0b0; margin-top: 12px;">Analizando forma ocular... 💖</p>
+                </div>
+
+                <!-- Caja de Resultados -->
+                <div id="result-box">
+                    <div class="result-title">✨ Resultado del análisis ✨</div>
+                    <div class="result-main">
+                        <span class="result-class" id="resultClass">-</span>
+                        <span class="result-confidence" id="resultConfidence">-</span>
+                    </div>
+                    <div class="top3-container" id="top3Container"></div>
+                </div>
+            </div>
+
+            <!-- Pestaña 2: Estilos de pestañas -->
+            <div id="tab2" class="tab-pane">
+                <h2 style="color: #e91e63; font-weight: 600; margin-bottom: 16px;">✨ Estilos de Pestañas ✨</h2>
+                <p style="color: #6a4a5a; margin-bottom: 24px;">
+                    Conoce los looks más populares y elige el que mejor se adapte a tus ojos.
+                </p>
+
+                <div class="styles-grid">
+                    <!-- Natural -->
+                    <div class="style-card">
+                        <div class="img-wrapper">
+                            <img src="{{ url_for('static', filename='Natural.JPEG') }}" alt="Natural Style" class="style-img" />
+                        </div>
+                        <div class="style-info">
+                            <h3>🌿 Natural</h3>
+                            <p>Realza la belleza natural del ojo con una definición sutil. Ideal para un look diario y fresco.</p>
+                            <div class="style-map">Mapa: <span>1–100</span></div>
+                        </div>
+                    </div>
+
+                    <!-- Cat Eye -->
+                    <div class="style-card">
+                        <div class="img-wrapper">
+                            <img src="{{ url_for('static', filename='Cat.JPEG') }}" alt="Cat Eye" class="style-img" />
+                        </div>
+                        <div class="style-info">
+                            <h3>🐱 Cat Eye</h3>
+                            <p>Alarga y eleva la mirada hacia las sienes, creando un efecto felino y sofisticado. Perfecto para ojos redondos.</p>
+                            <div class="style-map">Mapa: <span>11–12 (esquina externa)</span></div>
+                        </div>
+                    </div>
+
+                    <!-- Dolly -->
+                    <div class="style-card">
+                        <div class="img-wrapper">
+                            <img src="{{ url_for('static', filename='Dolly.JPEG') }}" alt="Dolly Eyes" class="style-img" />
+                        </div>
+                        <div class="style-info">
+                            <h3>🎀 Dolly Eyes</h3>
+                            <p>Busca agrandar y redondear la mirada, con pestañas prominentes en el centro. Da un aspecto juvenil y tierno.</p>
+                            <div class="style-map">Mapa: <span>8–12 (centro)</span></div>
+                        </div>
+                    </div>
+
+                    <!-- Squirrel -->
+                    <div class="style-card">
+                        <div class="img-wrapper">
+                            <img src="{{ url_for('static', filename='Squirrel.JPEG') }}" alt="Squirrel Eye" class="style-img" />
+                        </div>
+                        <div class="style-info">
+                            <h3>🐿️ Squirrel Eye</h3>
+                            <p>Similar al Cat Eye pero con un enfoque en alargar la esquina externa sin un ala tan pronunciada, dando una forma más suave y alargada.</p>
+                            <div class="style-map">Mapa: <span>8–11 (externo suave)</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pestaña 3: Chatbot Gemini -->
+            <div id="tab3" class="tab-pane">
+                <h2 style="color: #e91e63; font-weight: 600; margin-bottom: 16px;">💬 Asistente de Estilos Oculares</h2>
+                <p style="color: #6a4a5a; margin-bottom: 20px;">
+                    Pregúntame sobre tipos de ojos, estilos de pestañas o recomendaciones de maquillaje. 
+                    <strong>Solo respondo sobre temas oculares</strong> 💕
+                </p>
+
+                <div class="chat-box" id="chatBox">
+                    <div class="chat-msg bot">👋 ¡Hola! Soy tu asistente de estilos oculares. Pregúntame sobre tipos de ojos (almendrados, saltones, etc.) o sobre estilos de pestañas como Cat Eye, Dolly, Squirrel o Natural.</div>
+                </div>
+                <div class="chat-input-row">
+                    <input type="text" id="chatInput" placeholder="Escribe tu pregunta..." />
+                    <button id="chatSendBtn">Enviar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ========== MANEJO DE PESTAÑAS ==========
+        const tabBtns = document.querySelectorAll('.tab-btn');
+        const tabPanes = document.querySelectorAll('.tab-pane');
+
+        tabBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                // Quitar active de todos los botones y paneles
+                tabBtns.forEach(b => b.classList.remove('active'));
+                tabPanes.forEach(p => p.classList.remove('active'));
+
+                // Activar el botón clickeado
+                btn.classList.add('active');
+                // Activar el panel correspondiente
+                const tabId = btn.dataset.tab;
+                document.getElementById(tabId).classList.add('active');
+            });
+        });
+
+        // ========== LÓGICA DEL CLASIFICADOR (igual que antes) ==========
+        const dropZone = document.getElementById('dropZone');
+        const fileInput = document.getElementById('fileInput');
+        const previewContainer = document.getElementById('preview-container');
+        const previewImage = document.getElementById('previewImage');
+        const predictBtn = document.getElementById('predictBtn');
+        const loader = document.getElementById('loader');
+        const resultBox = document.getElementById('result-box');
+        const resultClass = document.getElementById('resultClass');
+        const resultConfidence = document.getElementById('resultConfidence');
+        const top3Container = document.getElementById('top3Container');
+
+        let selectedFile = null;
+
+        dropZone.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            dropZone.classList.add('dragover');
+        });
+
+        dropZone.addEventListener('dragleave', () => {
+            dropZone.classList.remove('dragover');
+        });
+
+        dropZone.addEventListener('drop', (e) => {
+            e.preventDefault();
+            dropZone.classList.remove('dragover');
+            if (e.dataTransfer.files.length) {
+                handleFile(e.dataTransfer.files[0]);
+            }
+        });
+
+        dropZone.addEventListener('click', () => {
+            fileInput.click();
+        });
+
+        fileInput.addEventListener('change', (e) => {
+            if (e.target.files.length) {
+                handleFile(e.target.files[0]);
+            }
+        });
+
+        function handleFile(file) {
+            if (!file.type.startsWith('image/')) {
+                alert('Por favor, sube una imagen válida.');
+                return;
+            }
+            selectedFile = file;
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                previewImage.src = e.target.result;
+                previewContainer.style.display = 'flex';
+                predictBtn.style.display = 'block';
+                resultBox.style.display = 'none';
+            };
+            reader.readAsDataURL(file);
+        }
+
+        predictBtn.addEventListener('click', async () => {
+            if (!selectedFile) return;
+
+            predictBtn.disabled = true;
+            loader.style.display = 'block';
+            resultBox.style.display = 'none';
+
+            const formData = new FormData();
+            formData.append('image', selectedFile);
+
+            try {
+                const response = await fetch('/predict', {
+                    method: 'POST',
+                    body: formData
+                });
+
+                const data = await response.json();
+
+                if (data.error) {
+                    alert('Error: ' + data.error);
+                    return;
+                }
+
+                if (data.success) {
+                    resultClass.textContent = data.clase.replace('_', ' ').toUpperCase();
+                    resultConfidence.textContent = `💖 ${data.confianza}%`;
+
+                    top3Container.innerHTML = '';
+                    data.top_3.forEach(item => {
+                        const span = document.createElement('span');
+                        span.className = 'top3-item';
+                        span.innerHTML = `<strong>${item.clase.replace('_', ' ')}</strong> ${item.probabilidad.toFixed(1)}%`;
+                        top3Container.appendChild(span);
+                    });
+
+                    resultBox.style.display = 'block';
+                }
+            } catch (error) {
+                alert('Error de conexión con el servidor: ' + error.message);
+            } finally {
+                loader.style.display = 'none';
+                predictBtn.disabled = false;
+            }
+        });
+    </script>
+
 </body>
 </html>
+  
