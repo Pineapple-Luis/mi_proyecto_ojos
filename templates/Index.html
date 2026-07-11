@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>🌸 Janeth Rocha - Lashes & Nails - Clasificador de Ojos</title>
+    <link rel="stylesheet" href="style.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;600;700&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+    <div class="glass-card">
+        <!-- Encabezado con logo -->
+        <div class="header">
+            <!-- Aquí va tu logo. Reemplaza 'logo.png' con la ruta de tu imagen -->
+            <img src="Logo.JPEG" alt="Janeth Rocha - Lashes & Nails" class="logo" />
+            <div class="header-text">
+                <h1>Janeth Rocha - Lashes & Nails</h1>
+                <p class="subtitle">🌸 Clasificador de formas oculares · 7 categorías 🌸</p>
+            </div>
+            <span class="heart">💕</span>
+        </div>
+
+        <!-- Pestañas (tabs) -->
+        <div class="tabs">
+            <button class="tab-btn active" data-tab="tab1">👁️ Clasificador</button>
+            <button class="tab-btn" data-tab="tab2">📋 Otras cosas</button>
+            <!-- Puedes agregar más pestañas aquí -->
+        </div>
+
+        <!-- Contenido de las pestañas -->
+        <div class="tab-content">
+            <!-- Pestaña 1: Clasificador -->
+            <div id="tab1" class="tab-pane active">
+                <!-- Zona de subida -->
+                <div class="drop-zone" id="dropZone">
+                    <div class="icon">🖼️</div>
+                    <p>Arrastra y suelta una foto de un ojo aquí</p>
+                    <p style="font-size: 14px; margin-top: 6px; color: #b0a0b0;">
+                        o <span class="highlight">haz clic</span> para seleccionar un archivo
+                    </p>
+                    <input type="file" id="fileInput" accept="image/*" />
+                </div>
+
+                <div id="preview-container">
+                    <img id="previewImage" src="#" alt="Vista previa" />
+                </div>
+
+                <button class="btn-predict" id="predictBtn">✨ Analizar este ojo ✨</button>
+
+                <div class="loader" id="loader">
+                    <div class="spinner"></div>
+                    <p style="color: #c0a0b0; margin-top: 12px;">Analizando forma ocular... 💖</p>
+                </div>
+
+                <!-- Caja de Resultados -->
+                <div id="result-box">
+                    <div class="result-title">✨ Resultado del análisis ✨</div>
+                    <div class="result-main">
+                        <span class="result-class" id="resultClass">-</span>
+                        <span class="result-confidence" id="resultConfidence">-</span>
+                    </div>
+                    <div class="top3-container" id="top3Container"></div>
+                </div>
+            </div>
+
+            <!-- Pestaña 2: Otras cosas -->
+            <div id="tab2" class="tab-pane">
+                <h2 style="color: #e91e63; font-weight: 400;">✨ Otras cosas ✨</h2>
+                <p style="color: #6a4a5a;">Aquí puedes agregar información, galería, contacto, lo que desees.</p>
+                <!-- Ejemplo: un espacio para texto o imágenes -->
+                <div style="margin-top: 20px; padding: 20px; background: rgba(255,255,255,0.3); border-radius: 30px;">
+                    <p>🖌️ Contenido adicional... </p>
+                </div>
+                <!-- Puedes poner lo que quieras aquí -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ========== MANEJO DE PESTAÑAS ==========
+        const tabBtns = document.querySelectorAll('.tab-btn');
+        const tabPanes = document.querySelectorAll('.tab-pane');
+
+        tabBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                // Quitar active de todos los botones y paneles
+                tabBtns.forEach(b => b.classList.remove('active'));
+                tabPanes.forEach(p => p.classList.remove('active'));
+
+                // Activar el botón clickeado
+                btn.classList.add('active');
+                // Activar el panel correspondiente
+                const tabId = btn.dataset.tab;
+                document.getElementById(tabId).classList.add('active');
+            });
+        });
+
+        // ========== LÓGICA DEL CLASIFICADOR (igual que antes) ==========
+        const dropZone = document.getElementById('dropZone');
+        const fileInput = document.getElementById('fileInput');
+        const previewContainer = document.getElementById('preview-container');
+        const previewImage = document.getElementById('previewImage');
+        const predictBtn = document.getElementById('predictBtn');
+        const loader = document.getElementById('loader');
+        const resultBox = document.getElementById('result-box');
+        const resultClass = document.getElementById('resultClass');
+        const resultConfidence = document.getElementById('resultConfidence');
+        const top3Container = document.getElementById('top3Container');
+
+        let selectedFile = null;
+
+        dropZone.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            dropZone.classList.add('dragover');
+        });
+
+        dropZone.addEventListener('dragleave', () => {
+            dropZone.classList.remove('dragover');
+        });
+
+        dropZone.addEventListener('drop', (e) => {
+            e.preventDefault();
+            dropZone.classList.remove('dragover');
+            if (e.dataTransfer.files.length) {
+                handleFile(e.dataTransfer.files[0]);
+            }
+        });
+
+        dropZone.addEventListener('click', () => {
+            fileInput.click();
+        });
+
+        fileInput.addEventListener('change', (e) => {
+            if (e.target.files.length) {
+                handleFile(e.target.files[0]);
+            }
+        });
+
+        function handleFile(file) {
+            if (!file.type.startsWith('image/')) {
+                alert('Por favor, sube una imagen válida.');
+                return;
+            }
+            selectedFile = file;
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                previewImage.src = e.target.result;
+                previewContainer.style.display = 'flex';
+                predictBtn.style.display = 'block';
+                resultBox.style.display = 'none';
+            };
+            reader.readAsDataURL(file);
+        }
+
+        predictBtn.addEventListener('click', async () => {
+            if (!selectedFile) return;
+
+            predictBtn.disabled = true;
+            loader.style.display = 'block';
+            resultBox.style.display = 'none';
+
+            const formData = new FormData();
+            formData.append('image', selectedFile);
+
+            try {
+                const response = await fetch('/predict', {
+                    method: 'POST',
+                    body: formData
+                });
+
+                const data = await response.json();
+
+                if (data.error) {
+                    alert('Error: ' + data.error);
+                    return;
+                }
+
+                if (data.success) {
+                    resultClass.textContent = data.clase.replace('_', ' ').toUpperCase();
+                    resultConfidence.textContent = `💖 ${data.confianza}%`;
+
+                    top3Container.innerHTML = '';
+                    data.top_3.forEach(item => {
+                        const span = document.createElement('span');
+                        span.className = 'top3-item';
+                        span.innerHTML = `<strong>${item.clase.replace('_', ' ')}</strong> ${item.probabilidad.toFixed(1)}%`;
+                        top3Container.appendChild(span);
+                    });
+
+                    resultBox.style.display = 'block';
+                }
+            } catch (error) {
+                alert('Error de conexión con el servidor: ' + error.message);
+            } finally {
+                loader.style.display = 'none';
+                predictBtn.disabled = false;
+            }
+        });
+    </script>
+
+</body>
+</html>
