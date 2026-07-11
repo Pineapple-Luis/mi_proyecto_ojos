@@ -65,7 +65,7 @@ def preprocess_image(image_bytes):
 # ============================================
 @app.route('/')
 def home():
-    return render_template('index.html')
+    return "Hola, la app está funcionando correctamente.", 200
 
 @app.route('/predict', methods=['POST'])
 def predict():
