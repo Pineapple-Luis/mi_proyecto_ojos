@@ -125,6 +125,7 @@ def predict():
 # 5. LANZAMIENTO
 # ============================================
 if __name__ == '__main__':
+    from waitress import serve
     import os
     port = int(os.environ.get('PORT', 5000))
-    app.run(host='0.0.0.0', port=port, debug=False)
+    serve(app, host='0.0.0.0', port=port)
