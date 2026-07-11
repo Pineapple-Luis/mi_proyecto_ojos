@@ -1,6 +1,6 @@
 Flask==2.3.3
 tensorflow==2.16.1
 Pillow==10.1.0
-numpy==1.24.3
+numpy==1.26.4 
 google-generativeai==0.3.2
-setuptools>=68.0.0
+setuptools==68.2.2
