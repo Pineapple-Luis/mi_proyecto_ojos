@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>🌸 Janeth Rocha - Lashes & Nails - Clasificador de Ojos</title>
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
     <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;600;700&display=swap" rel="stylesheet" />
 </head>
 <body>
@@ -13,7 +13,7 @@
         <!-- Encabezado con logo -->
         <div class="header">
             <!-- Aquí va tu logo. Reemplaza 'logo.png' con la ruta de tu imagen -->
-            <img src="Logo.JPEG" alt="Janeth Rocha - Lashes & Nails" class="logo" />
+            <img src="{{ url_for('static', filename='Logo.JPEG') }}" alt="Janeth Rocha - Lashes & Nails" class="logo" />
             <div class="header-text">
                 <h1>Janeth Rocha - Lashes & Nails</h1>
                 <p class="subtitle">🌸 Clasificador de formas oculares · 7 categorías 🌸</p>
@@ -76,7 +76,7 @@
                     <!-- Natural -->
                     <div class="style-card">
                         <div class="img-wrapper">
-                            <img src="Natural.JPEG" alt="Natural Style" class="style-img" />
+                            <img src="{{ url_for('static', filename='Natural.JPEG') }}" alt="Natural Style" class="style-img" />
                         </div>
                         <div class="style-info">
                             <h3>🌿 Natural</h3>
@@ -88,7 +88,7 @@
                     <!-- Cat Eye -->
                     <div class="style-card">
                         <div class="img-wrapper">
-                            <img src="Cat.JPEG" alt="Cat Eye" class="style-img" />
+                            <img src="{{ url_for('static', filename='Cat.JPEG') }}" alt="Cat Eye" class="style-img" />
                         </div>
                         <div class="style-info">
                             <h3>🐱 Cat Eye</h3>
@@ -100,7 +100,7 @@
                     <!-- Dolly -->
                     <div class="style-card">
                         <div class="img-wrapper">
-                            <img src="Dolly.JPEG" alt="Dolly Eyes" class="style-img" />
+                            <img src="{{ url_for('static', filename='Dolly.JPEG') }}" alt="Dolly Eyes" class="style-img" />
                         </div>
                         <div class="style-info">
                             <h3>🎀 Dolly Eyes</h3>
@@ -112,7 +112,7 @@
                     <!-- Squirrel -->
                     <div class="style-card">
                         <div class="img-wrapper">
-                            <img src="Squirrel.JPEG" alt="Squirrel Eye" class="style-img" />
+                            <img src="{{ url_for('static', filename='Squirrel.JPEG') }}" alt="Squirrel Eye" class="style-img" />
                         </div>
                         <div class="style-info">
                             <h3>🐿️ Squirrel Eye</h3>
